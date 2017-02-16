@@ -94,3 +94,8 @@ li {
   font-size: 32px;
   cursor: pointer;
 }
+
+#newGrid li {
+    display: block;
+    font-size: 24px;
+}

@@ -7,7 +7,7 @@ var hyps = []
 var curX = 0;
 var curY = 0;
 
-var col1 = "#FF850A";
+var col1 = "#B00";
 var col2 = "#0A85FF";
 
 function shuffle(array) {
@@ -294,4 +294,9 @@ function restart() {
 
 }
 function newGrid() {
+    $( "#newGrid" ).popup( "open" );
+}
+function newRandomGrid(nlevel) {
+    $( "#newGrid" ).popup( "close" );
+    setTimeout(function() { getRandomGrid(nlevel); }, 500);
 }
