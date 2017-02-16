@@ -1,6 +1,9 @@
 var T = Array.from(new Array(9), () => new Array(9).fill(0));
 var Tref = Array.from(new Array(9), () => new Array(9));
 
+var curX = 0;
+var curY = 0;
+
 function shuffle(array) {
     let counter = array.length;
     while (counter > 0) {
@@ -52,8 +55,22 @@ function init() {
             if (i%3 == 2) Tref[i][j].className += " bottomBorder";
             if (j%3 == 0) Tref[i][j].className += " leftBorder";
             if (j%3 == 2) Tref[i][j].className += " rightBorder";
+            var y = document.createAttribute("y");
+            var x = document.createAttribute("x");
+            var click = document.createAttribute("clickable");
+            click.value = 0;
+            y.value = i;
+            x.value = j;
+            Tref[i][j].setAttributeNode(y);
+            Tref[i][j].setAttributeNode(x);
+            Tref[i][j].setAttributeNode(click);
         }
     }
+    // click on cells
+    $("#grid").on("click", "td", function(e) {
+        clickCell(this);
+        e.stopPropagation();
+    });
     setTimeout(function() { getRandomGrid(3); }, 500);
 }
 
@@ -155,6 +172,13 @@ function _getRandomGrid2(nlevel) {
 function _getRandomGrid(nlevel) {
     while(!_getRandomGrid2(nlevel)) { Function.prototype(); }
     updateGrid();
+    for(i=0;i<9;i++) {
+        for(j=0;j<9;j++) {
+            if (T[i][j] == 0) Tref[i][j].setAttribute("clickable", 1);
+            else Tref[i][j].setAttribute("clickable", 0);
+        }
+    }
+    // make clickable
     $( "#waiting" ).popup( "close" )
     //$.mobile.loading().hide();
 }
@@ -162,4 +186,24 @@ function getRandomGrid(nlevel) {
     $( "#waiting" ).popup( "open" )
     //$.mobile.loading().show();
     setTimeout(function() { _getRandomGrid(nlevel); }, 0);
+}
+
+function elsewhere() {
+    Tref[curY][curX].style.backgroundColor = "";
+    document.getElementById("digits").style.display = "none";
+}
+
+function clickCell(cell) {
+    // TODO: use curX, curY;
+    var c = Number(cell.getAttribute("clickable"));
+    if (c==1) {
+        document.getElementById("digits").style.display = "inline-block";
+        var y = Number(cell.getAttribute("y"));
+        var x = Number(cell.getAttribute("x"));
+        Tref[curY][curX].style.backgroundColor = "";
+        curY = y;
+        curX = x;
+        cell.style.backgroundColor = "#BBB";
+        var a = allowed(T, y, x);
+    }
 }

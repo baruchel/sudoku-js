@@ -1,4 +1,18 @@
+body {
+    font-family: monospace;
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+}
+
+table {
+    display: inline-block;
+}
+
 #grid {
+    margin-top: 4px;
     border-collapse: collapse;
     border-spacing: 0;
 }
@@ -12,7 +26,9 @@
     width: 2em;
     height: 2em;
     text-align: center;
-    border: 1px solid black;
+    font-weight: bold;
+    font-size: 120%;
+    border: 1px dotted black;
     margin: 0;
     padding: 4px;
 }
@@ -31,4 +47,21 @@
 
 .rightBorder {
     border-right: 2px solid black;
+}
+
+#digits {
+    margin-left: 4px;
+    border-spacing: 8px;
+}
+
+.digit {
+    color: #222;
+    width: 1.45em;
+    height: 1.45em;
+    text-align: center;
+    font-size: 175%;
+    border: 1.5px solid #222;
+    border-radius: 8px;
+    padding: 0px;
+    margin: 0;
 }

@@ -15,7 +15,7 @@
 
   </head>
 
-  <body onload="init();">
+  <body onload="init();" onclick="elsewhere();">
     <!-- Start of the page -->
     <div data-role="page" id="home">
 
@@ -27,7 +27,30 @@
 
       <div role="main" class="ui-content">
 
+        <h1>Sudoku</h1>
+
+        <div class="table">
         <table id="grid"></table>
+        </div>
+
+        <div class="table">
+        <table id="digits">
+            <tr>
+                <td id="digit-0" class="digit"></td>
+                <td id="digit-1" class="digit">1</td>
+                <td id="digit-2" class="digit">2</td>
+                <td id="digit-3" class="digit">3</td>
+                <td id="digit-4" class="digit">4</td>
+            <tr>
+                <td id="digit-5" class="digit">5</td>
+                <td id="digit-6" class="digit">6</td>
+                <td id="digit-7" class="digit">7</td>
+                <td id="digit-8" class="digit">8</td>
+                <td id="digit-9" class="digit">9</td>
+            </tr>
+
+        </table>
+        </div>
 
       </div>
 
