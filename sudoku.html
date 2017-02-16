@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Sudoku</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+
+  <link rel="stylesheet" href="jquery.mobile-1.4.5.min.css" />
+  <script type="text/javascript" src="jquery-1.11.1.min.js"></script>
+  <script type="text/javascript" src="jquery.mobile-1.4.5.min.js"></script>
+
+  <script type="text/javascript" src="sudoku.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  </head>
+
+  <body onload="init();">
+    <!-- Start of the page -->
+    <div data-role="page" id="home">
+
+      <!--
+      <div data-role="header">
+        <h1>Sudoku</h1>
+      </div>
+        -->
+
+      <div role="main" class="ui-content">
+
+        <table id="grid"></table>
+
+      </div>
+
+      <!--
+      <div data-role="footer">
+        <h4>@baruchel</h4>
+        <tt>written by th. baruchel</tt>
+      </div>
+      -->
+
+      <div data-role="popup" id ="waiting" class="ui-content"
+          data-theme="b" data-overlay-theme="b">
+        <p>creating a new grid…</p>
+      </div>
+
+    </div>
+    <!-- End of the page -->
+
+  </body>
+</html>

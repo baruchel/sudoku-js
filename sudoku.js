@@ -1,0 +1,165 @@
+var T = Array.from(new Array(9), () => new Array(9).fill(0));
+var Tref = Array.from(new Array(9), () => new Array(9));
+
+function shuffle(array) {
+    let counter = array.length;
+    while (counter > 0) {
+        let index = Math.floor(Math.random() * counter);
+        counter--;
+        let temp = array[counter];
+        array[counter] = array[index];
+        array[index] = temp;
+    }
+    return array;
+}
+
+function randomOrderCells() {
+    var i,j;
+    var arr = []
+    for (i=0;i<9;i++) {
+        for (j=0;j<9;j++) {
+            arr.push([i,j]);
+        }
+    }
+    return shuffle(arr);
+}
+
+// Set cell (y,x) with value n   (0 for empty cell)
+function setCell(y, x, n) {
+    if (n==0) Tref[y][x].innerHTML = "";
+    else Tref[y][x].innerHTML = n.toString();
+}
+
+function updateGrid() {
+    var i,j;
+    for(i=0;i<9;i++) {
+        for(j=0;j<9;j++) {
+            setCell(i,j,T[i][j]);
+        }
+    }
+}
+
+function init() {
+    var i, j;
+    var tbl = document.getElementById("grid");
+    for(i=0;i<9;i++) {
+        var r = tbl.insertRow(-1);
+        r.className = "gridRow";
+        for(j=0;j<9;j++) {
+            Tref[i][j] = r.insertCell(-1);
+            Tref[i][j].className = "gridCell";
+            if (i%3 == 0) Tref[i][j].className += " topBorder";
+            if (i%3 == 2) Tref[i][j].className += " bottomBorder";
+            if (j%3 == 0) Tref[i][j].className += " leftBorder";
+            if (j%3 == 2) Tref[i][j].className += " rightBorder";
+        }
+    }
+    setTimeout(function() { getRandomGrid(3); }, 500);
+}
+
+function allowed(A, y,x) {
+    var i;
+    var res = [];
+    var arr = new Array(10).fill(true); 
+    if (A[y][x] > 0) return res;
+    for(i=0;i<9;i++) arr[A[y][i]] = false;
+    for(i=0;i<9;i++) arr[A[i][x]] = false;
+    for(i=0;i<9;i++)
+        arr[ A[ y-(y%3) + Math.floor(i/3)][x-(x%3) + (i%3) ] ] = false;
+    for(i=1;i<10;i++)
+        if (arr[i]) res.push(i);
+    return res;
+}
+
+function bestHypothesis(A) {
+    var i,j,s;
+    var bSc = 10;
+    var bCoords = [9,9];
+    var bAll = [];
+    for(i=0;i<9;i++) {
+        for(j=0;j<9;j++) {
+            if (A[i][j] == 0) {
+                s = allowed(A, i,j);
+                n = s.length;
+                if (n<bSc) {
+                    bSc = n;
+                    bCoords = [i,j];
+                    bAll = s;
+                }
+            }
+        }
+    }
+    return [ bAll, bCoords[0], bCoords[1] ];
+}
+
+function _findAcceptableGrid() {
+    var i;
+    var [all, y, x] = bestHypothesis(T);
+    if (y==9) return true;
+    if (all.length==0) return false; // invalid grid
+    all = shuffle(all);
+    for (i=0;i<all.length;i++) {
+        T[y][x] = all[i];
+        r = _findAcceptableGrid();
+        if (r) return true;
+    }
+}
+function findAcceptableGrid() {
+    var i,j;
+    while(_findAcceptableGrid() != true) {
+        for(i=0;i<9;i++) { for(j=0;j<9;j++) T[i][j] = 0; }
+    }
+}
+
+function _findValidityClass(A, n) {
+    var i;
+    var sol = -1;
+    var [all, y, x] = bestHypothesis(A);
+    if (y==9) return n;
+    if (all.length==0) return -1; // invalid grid
+    if (all.length > 1) n++; // make a new hypothesis
+    for (i=0;i<all.length;i++) {
+        A[y][x] = all[i];
+        r = _findValidityClass(A, n);
+        A[y][x] = 0;
+        if (r >= 0) {
+            if (sol >= 0) return -2; // at least two solutions exist
+            sol = r;
+        } else if (r==-2) return -2;
+    }
+    return sol;
+}
+
+function _getRandomGrid2(nlevel) {
+    var coords = randomOrderCells();
+    var i, j, v, p;
+    for(i=0;i<9;i++) { for(j=0;j<9;j++) T[i][j] = 0; }
+    findAcceptableGrid();
+    for(i=0;i<81;i++) {
+        var [y,x] = coords[i];
+        tmp = T[y][x];
+        T[y][x] = 0;
+        v = _findValidityClass(T, 0);
+        if(v==-2) {
+            T[y][x] = tmp;
+            continue;
+        } else if (v>nlevel) {
+            if (p!=nlevel) return false;
+            T[y][x] = tmp;
+            return true;
+        }
+        p = v;
+    }
+    return false;
+}
+function _getRandomGrid(nlevel) {
+    while(!_getRandomGrid2(nlevel)) { Function.prototype(); }
+    updateGrid();
+    $( "#waiting" ).popup( "close" )
+    //$.mobile.loading().hide();
+}
+function getRandomGrid(nlevel) {
+    $( "#waiting" ).popup( "open" )
+    //$.mobile.loading().show();
+    setTimeout(function() { _getRandomGrid(nlevel); }, 0);
+}

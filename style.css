@@ -1,0 +1,34 @@
+#grid {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.gridRow {
+    margin: 0;
+    padding: 0;
+}
+
+.gridCell {
+    width: 2em;
+    height: 2em;
+    text-align: center;
+    border: 1px solid black;
+    margin: 0;
+    padding: 4px;
+}
+
+.topBorder {
+    border-top: 2px solid black;
+}
+
+.bottomBorder {
+    border-bottom: 2px solid black;
+}
+
+.leftBorder {
+    border-left: 2px solid black;
+}
+
+.rightBorder {
+    border-right: 2px solid black;
+}
