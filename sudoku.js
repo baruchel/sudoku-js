@@ -1,5 +1,7 @@
 var T = Array.from(new Array(9), () => new Array(9).fill(0));
 var Tref = Array.from(new Array(9), () => new Array(9));
+var digits = new Array(10);
+var hyp = false;
 
 var curX = 0;
 var curY = 0;
@@ -71,6 +73,17 @@ function init() {
         clickCell(this);
         e.stopPropagation();
     });
+    // digits
+    for(i=0;i<10;i++)
+        digits[i] = document.getElementById("digit-"+String(i));
+    // Buttons
+    i = $('#digits').height();
+    j = $('#buttons1').height();
+    j = Math.floor( (i-j)/2 ) + 4;
+    $('#buttons1').height( i-j );
+    $('#buttons1').css("margin-top", String(j)+"px");
+    document.getElementById("digits").style.display = "none";
+
     setTimeout(function() { getRandomGrid(3); }, 500);
 }
 
@@ -191,19 +204,43 @@ function getRandomGrid(nlevel) {
 function elsewhere() {
     Tref[curY][curX].style.backgroundColor = "";
     document.getElementById("digits").style.display = "none";
+    document.getElementById("buttons1").style.display = "inline-block";
 }
 
 function clickCell(cell) {
     // TODO: use curX, curY;
     var c = Number(cell.getAttribute("clickable"));
     if (c==1) {
-        document.getElementById("digits").style.display = "inline-block";
         var y = Number(cell.getAttribute("y"));
         var x = Number(cell.getAttribute("x"));
         Tref[curY][curX].style.backgroundColor = "";
+        $( "#digits" ).off("click", "**");
         curY = y;
         curX = x;
         cell.style.backgroundColor = "#BBB";
+        document.getElementById("digits").style.display = "inline-block";
+        document.getElementById("buttons1").style.display = "none";
         var a = allowed(T, y, x);
-    }
+        var d = new Array(10).fill(false);
+        for(i=0;i<a.length;i++) d[a[i]] = true;
+        d[0] = true;
+        for(i=0;i<10;i++) {
+            if (d[i]) {
+                let v = i;
+                let col = (hyp)?"#0A85FF":"#FF850A";
+                digits[i].style.color=col;
+                digits[i].style.borderColor="#222";
+                $("#digits").on("click", "#digit-"+String(i), function(e) {
+                    T[y][x] = v;
+                    setCell(y, x, v);
+                    Tref[y][x].style.color = "red";
+                    //e.stopPropagation();
+                });
+            } else {
+                digits[i].style.color="#B8B8B8";
+                digits[i].style.borderColor="#B8B8B8";
+                digits[i].style.cursor="pointer";
+            }
+        }
+    } else elsewhere();
 }

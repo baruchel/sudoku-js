@@ -12,6 +12,7 @@
   <script type="text/javascript" src="sudoku.js"></script>
 
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="ionic/ionicons.min.css">
 
   </head>
 
@@ -33,7 +34,7 @@
         <table id="grid"></table>
         </div>
 
-        <div class="table">
+        <div class="table panel">
         <table id="digits">
             <tr>
                 <td id="digit-0" class="digit"></td>
@@ -52,6 +53,20 @@
         </table>
         </div>
 
+        <div class="panel">
+            <ul id="buttons1">
+                <li class="ion-fork-repo" data-pack="default"></li>
+                <li class="ion-pull-request" data-pack="default"></li>
+                <li class="ion-android-close" data-pack="android"></li>
+            </ul>
+        </div>
+        <div>
+            <ul id="buttons2">
+                <li class="ion-android-refresh" data-pack="android"></li>
+                <li class="ion-code" data-pack="default"></li>
+            </ul>
+        </div>
+
       </div>
 
       <!--
@@ -63,7 +78,7 @@
 
       <div data-role="popup" id ="waiting" class="ui-content"
           data-theme="b" data-overlay-theme="b">
-        <p>creating a new grid…</p>
+        <p>generating a new grid…</p>
       </div>
 
     </div>
