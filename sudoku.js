@@ -91,7 +91,7 @@ function init() {
     document.getElementById("but2").style.color="#B8B8B8";
     document.getElementById("but3").style.color="#B8B8B8";
 
-    setTimeout(function() { getRandomGrid(3); }, 500);
+    setTimeout(function() { getRandomGrid(3); }, 250);
 }
 
 function allowed(A, y,x) {
@@ -298,5 +298,5 @@ function newGrid() {
 }
 function newRandomGrid(nlevel) {
     $( "#newGrid" ).popup( "close" );
-    setTimeout(function() { getRandomGrid(nlevel); }, 500);
+    setTimeout(function() { getRandomGrid(nlevel); }, 250);
 }
