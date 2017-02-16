@@ -2,9 +2,13 @@ var T = Array.from(new Array(9), () => new Array(9).fill(0));
 var Tref = Array.from(new Array(9), () => new Array(9));
 var digits = new Array(10);
 var hyp = false;
+var hyps = []
 
 var curX = 0;
 var curY = 0;
+
+var col1 = "#FF850A";
+var col2 = "#0A85FF";
 
 function shuffle(array) {
     let counter = array.length;
@@ -83,6 +87,9 @@ function init() {
     $('#buttons1').height( i-j );
     $('#buttons1').css("margin-top", String(j)+"px");
     document.getElementById("digits").style.display = "none";
+    document.getElementById("but1").style.color="#000";
+    document.getElementById("but2").style.color="#B8B8B8";
+    document.getElementById("but3").style.color="#B8B8B8";
 
     setTimeout(function() { getRandomGrid(3); }, 500);
 }
@@ -227,13 +234,15 @@ function clickCell(cell) {
         for(i=0;i<10;i++) {
             if (d[i]) {
                 let v = i;
-                let col = (hyp)?"#0A85FF":"#FF850A";
+                let col = (hyp)?col2:col1;
+                let h = hyp;
                 digits[i].style.color=col;
                 digits[i].style.borderColor="#222";
                 $("#digits").on("click", "#digit-"+String(i), function(e) {
                     T[y][x] = v;
                     setCell(y, x, v);
-                    Tref[y][x].style.color = "red";
+                    Tref[y][x].style.color = col;
+                    if (h) hyps.push(Tref[y][x]);
                     //e.stopPropagation();
                 });
             } else {
@@ -243,4 +252,46 @@ function clickCell(cell) {
             }
         }
     } else elsewhere();
+}
+
+function hypothesis1() {
+    if(!hyp) {
+        document.getElementById("but1").style.color="#B8B8B8";
+        document.getElementById("but2").style.color="#000";
+        document.getElementById("but3").style.color="#000";
+        hyp = true;
+    }
+}
+function hypothesis2() {
+    var i;
+    console.log(hyps);
+    for(i=0;i<hyps.length;i++) hyps[i].style.color = col1;
+    hyps = []
+    hyp = false;
+    document.getElementById("but1").style.color="#000";
+    document.getElementById("but2").style.color="#B8B8B8";
+    document.getElementById("but3").style.color="#B8B8B8";
+}
+function hypothesis3() {
+    var i;
+    console.log(hyps);
+    for(i=0;i<hyps.length;i++) hyps[i].innerHTML = "";
+    hyps = []
+    hyp = false;
+    document.getElementById("but1").style.color="#000";
+    document.getElementById("but2").style.color="#B8B8B8";
+    document.getElementById("but3").style.color="#B8B8B8";
+}
+function restart() {
+    var i,j;
+    for(i=0;i<9;i++) {
+        for(j=0;j<9;j++) {
+            if(Number(Tref[i][j].getAttribute("clickable")) == 1) {
+                setCell(i,j,0);
+            }
+        }
+    }
+
+}
+function newGrid() {
 }
