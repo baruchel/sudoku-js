@@ -96,6 +96,12 @@ li {
 }
 
 #newGrid li {
-    display: block;
+    text-align: center;
     font-size: 24px;
+    display:table;                                             
+    margin:0px auto 0px auto;                                  
+}
+
+#cancel {
+    padding-top: 16px;
 }
