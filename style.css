@@ -96,12 +96,17 @@ li {
 }
 
 #newGrid ul {
-    width: 300px;
     margin: 0 auto;
 }
 #newGrid li {
+    display: table;
+    margin: 0 auto;
     text-align: center;
     font-size: 24px;
+    color: #FF6;
+    font-size: 18px;
+    cursor: pointer;
+    padding-bottom: 6px;
 }
 
 #restart li {
