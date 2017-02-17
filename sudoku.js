@@ -220,7 +220,6 @@ function elsewhere() {
 }
 
 function clickCell(cell) {
-    // TODO: use curX, curY;
     var c = Number(cell.getAttribute("clickable"));
     if (c==1) {
         var y = Number(cell.getAttribute("y"));
@@ -280,7 +279,12 @@ function hypothesis2() {
 function hypothesis3() {
     var i;
     console.log(hyps);
-    for(i=0;i<hyps.length;i++) hyps[i].innerHTML = "";
+    for(i=0;i<hyps.length;i++) {
+        hyps[i].innerHTML = "";
+        var y = Number(hyps[i].getAttribute("y"));
+        var x = Number(hyps[i].getAttribute("x"));
+        T[y][x] = 0;
+    }
     hyps = []
     hyp = false;
     document.getElementById("but1").style.color="#000";
