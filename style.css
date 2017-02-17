@@ -105,3 +105,8 @@ li {
 #cancel {
     padding-top: 16px;
 }
+
+#restart li {
+    font-size: 24px;
+    width: auto;
+}

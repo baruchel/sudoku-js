@@ -44,6 +44,7 @@ function updateGrid() {
     for(i=0;i<9;i++) {
         for(j=0;j<9;j++) {
             setCell(i,j,T[i][j]);
+            Tref[i][j].style.color='';
         }
     }
 }
@@ -201,6 +202,10 @@ function _getRandomGrid(nlevel) {
     // make clickable
     $( "#waiting" ).popup( "close" )
     //$.mobile.loading().hide();
+    hyp = false;
+    document.getElementById("but1").style.color="#000";
+    document.getElementById("but2").style.color="#B8B8B8";
+    document.getElementById("but3").style.color="#B8B8B8";
 }
 function getRandomGrid(nlevel) {
     $( "#waiting" ).popup( "open" )
@@ -287,14 +292,16 @@ function restart() {
     for(i=0;i<9;i++) {
         for(j=0;j<9;j++) {
             if(Number(Tref[i][j].getAttribute("clickable")) == 1) {
+                T[i][j] = 0;
                 setCell(i,j,0);
             }
         }
     }
+    hyp = false;
+    document.getElementById("but1").style.color="#000";
+    document.getElementById("but2").style.color="#B8B8B8";
+    document.getElementById("but3").style.color="#B8B8B8";
 
-}
-function newGrid() {
-    $( "#newGrid" ).popup( "open" );
 }
 function newRandomGrid(nlevel) {
     $( "#newGrid" ).popup( "close" );

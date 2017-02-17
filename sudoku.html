@@ -62,8 +62,8 @@
         </div>
         <div>
             <ul id="buttons2">
-                <li class="ion-android-refresh" data-pack="android" onclick="restart();"></li>
-                <li class="ion-code" data-pack="default" onclick="newGrid();"></li>
+                <li class="ion-android-refresh" data-pack="android" onclick='$( "#restart" ).popup( "open" );'></li>
+                <li class="ion-code" data-pack="default" onclick='$( "#newGrid" ).popup( "open" );'></li>
             </ul>
         </div>
 
@@ -98,6 +98,15 @@
               <li onclick="newRandomGrid(11);">11</li>
               <li onclick="newRandomGrid(12);">12</li>
               <li id="cancel" onclick='$( "#newGrid" ).popup( "close" );'>(cancel)</li>
+          </ul>
+      </div>
+
+      <div data-role="popup" id ="restart" class="ui-content"
+          data-theme="b" data-overlay-theme="b">
+          <h2>Restart game?</h2>
+          <ul>
+              <li onclick='restart();$( "#restart" ).popup( "close" );'>yes</li>
+              <li id="cancel" onclick='$( "#restart" ).popup( "close" );'>cancel</li>
           </ul>
       </div>
 
