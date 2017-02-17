@@ -4,6 +4,7 @@ var Tsol = Array.from(new Array(9), () => new Array(9).fill(0));
 var digits = new Array(10);
 var hyp = false;
 var hyps = []
+var coeff = [ 0, 1, 9, 81, 729, 6561, 59049, 531441, 4782969];
 
 var curX = 0;
 var curY = 0;
@@ -158,7 +159,8 @@ function _findValidityClass(A, n) {
     var [all, y, x] = bestHypothesis(A);
     if (y==9) return n;
     if (all.length==0) return -1; // invalid grid
-    if (all.length > 1) n++; // make a new hypothesis
+    // if (all.length > 1) n++; // make a new hypothesis
+    n += coeff[all.length-1];
     for (i=0;i<all.length;i++) {
         A[y][x] = all[i];
         r = _findValidityClass(A, n);
