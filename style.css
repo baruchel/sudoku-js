@@ -95,15 +95,13 @@ li {
   cursor: pointer;
 }
 
+#newGrid ul {
+    width: 300px;
+    margin: 0 auto;
+}
 #newGrid li {
     text-align: center;
     font-size: 24px;
-    display:table;                                             
-    margin:0px auto 0px auto;                                  
-}
-
-#cancel {
-    padding-top: 16px;
 }
 
 #restart li {
@@ -117,9 +115,18 @@ li {
 .help {
     font-size: 14px;
     width: 160px;
+    text-align: left;
+    top: -8px;
+}
+#help p {
+    font-weight: bold;
+    text-align: left;
+    margin-top: 18px;
+    margin-bottom: 8px;
+    font-size: 16px;
 }
 .helpButton {
     color: #FF6;
-    padding-top: 8px;
+    padding-bottom: 6px;
     cursor: pointer;
 }

@@ -244,7 +244,7 @@ function clickCell(cell) {
                 let col = (hyp)?col2:col1;
                 let h = hyp;
                 digits[i].style.color=col;
-                digits[i].style.borderColor="#222";
+                digits[i].style.borderColor=col;
                 $("#digits").on("click", "#digit-"+String(i), function(e) {
                     T[y][x] = v;
                     setCell(y, x, v);

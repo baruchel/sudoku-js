@@ -86,6 +86,7 @@
           data-theme="b" data-overlay-theme="b">
           <h2>Select level:</h2>
           <ul>
+              <li onclick="newRandomGrid(0);">0</li>
               <li onclick="newRandomGrid(1);">1</li>
               <li onclick="newRandomGrid(2);">2</li>
               <li onclick="newRandomGrid(3);">3</li>
@@ -98,7 +99,8 @@
               <li onclick="newRandomGrid(10);">10</li>
               <li onclick="newRandomGrid(11);">11</li>
               <li onclick="newRandomGrid(12);">12</li>
-              <li id="cancel" onclick='$( "#newGrid" ).popup( "close" );'>(cancel)</li>
+              <li onclick="newRandomGrid(13);">13</li>
+              <li onclick="newRandomGrid(14);">14</li>
           </ul>
       </div>
 
@@ -114,7 +116,7 @@
       <div data-role="popup" id ="help" class="ui-content"
           data-theme="b" data-overlay-theme="b">
           <h2>Help</h2>
-          <p>bla-bla</p>
+          <p>Main symbols</p>
           <ul>
                 <li class="ion-fork-repo" data-pack="default"></li>
                 <li class="help">make an hypothesis</li>
@@ -127,7 +129,8 @@
                 <li class="ion-code" data-pack="default"></li>
                 <li class="help">generate a new grid</li>
           </ul>
-          <h3 id="check" class="helpButton" onclick='check();$( "#help" ).popup( "close" );'>Check current answer</h3>
+          <p>Additional tools</p>
+          <h3 id="check" class="helpButton" onclick='check();$( "#help" ).popup( "close" );'>Show wrong answers</h3>
           <h3 id="solve" class="helpButton" onclick='solve();$( "#help" ).popup( "close" );'>Solve current grid</h3>
       </div>
 
