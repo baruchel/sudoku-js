@@ -94,7 +94,7 @@ function init() {
     document.getElementById("but2").style.color="#B8B8B8";
     document.getElementById("but3").style.color="#B8B8B8";
 
-    setTimeout(function() { getRandomGrid(64); }, 250);
+    setTimeout(function() { getRandomGrid(128); }, 250);
 }
 
 function allowed(A, y,x) {
@@ -172,21 +172,41 @@ function _findValidityClass(A, n) {
 }
 
 function _getRandomGrid2(nlevel) {
-    var i, j, v, y, x;
+    var i, j, v, y1, x1, y2, x2, s;
     var sc = -2;
+    var zeros = [];
     for(i=0;i<9;i++) { for(j=0;j<9;j++) T[i][j] = 0; }
     findAcceptableGrid();
     for(i=0;i<nlevel;i++) {
-        while(true) {
-            y = Math.floor(Math.random() * 9);
-            x = Math.floor(Math.random() * 9);
-            if(T[y][x] != 0) break;
+        y1 = Math.floor(Math.random() * 9);
+        x1 = Math.floor(Math.random() * 9);
+        if (T[y1][x1] != 0) {
+            T[y1][x1] = 0;
+            v = _findValidityClass(T, 0);
+            if(v < 0) T[y1][x1] = Tsol[y1][x1];
+            else {
+                sc = v; zeros.push([y1,x1]);
+            }
         }
-        T[y][x] = 0;
-        v = _findValidityClass(T, 0);
-        if(v < sc) T[y][x] = Tsol[y][x];
-        else { sc = v; }
+        y1 = Math.floor(Math.random() * 9);
+        x1 = Math.floor(Math.random() * 9);
+        if (T[y1][x1] != 0) {
+            j = Math.floor(Math.random() * zeros.length);
+            y2 = zeros[j][0]; x2 = zeros[j][1];
+            T[y1][x1] = 0; T[y2][x2] = Tsol[y2][x2];
+            v = _findValidityClass(T, 0);
+            if(v < sc)
+                {
+                    T[y1][x1] = Tsol[y1][x1];
+                    T[y2][x2] = 0;
+                }
+            else {
+                sc = v;
+                zeros[j] = [y1, x1];
+            }
+        }
     }
+    console.log(sc);
     return sc;
 }
 
