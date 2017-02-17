@@ -173,7 +173,6 @@ function _findValidityClass(A, n) {
     return sol;
 }
 
-/*
 function _getRandomGrid2(nlevel) {
     var i, j, v, y1, x1, y2, x2, s;
     var sc = -2;
@@ -210,8 +209,8 @@ function _getRandomGrid2(nlevel) {
     }
     return sc;
 }
-*/
 
+/*
 function _getRandomGrid2(nlevel) {
     var i, j, k, v, y1, x1, y2, x2, x3, y3, s;
     var sc = -2;
@@ -256,6 +255,7 @@ function _getRandomGrid2(nlevel) {
     }
     return sc;
 }
+*/
 
 function _getRandomGrid(nlevel) {
     console.log(_getRandomGrid2(nlevel));
