@@ -110,3 +110,16 @@ li {
     font-size: 24px;
     width: auto;
 }
+
+#help ul {
+    width: 250px; 
+}
+.help {
+    font-size: 14px;
+    width: 160px;
+}
+.helpButton {
+    color: #FF6;
+    padding-top: 8px;
+    cursor: pointer;
+}

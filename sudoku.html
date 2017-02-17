@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <title>Sudoku</title>
+  <title>Sudoku JS</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta charset="utf-8" />
 
@@ -28,7 +28,7 @@
 
       <div role="main" class="ui-content">
 
-        <h1>Sudoku</h1>
+        <h1>Sudoku JS</h1>
 
         <div class="table">
         <table id="grid"></table>
@@ -64,6 +64,7 @@
             <ul id="buttons2">
                 <li class="ion-android-refresh" data-pack="android" onclick='$( "#restart" ).popup( "open" );'></li>
                 <li class="ion-code" data-pack="default" onclick='$( "#newGrid" ).popup( "open" );'></li>
+                <li class="ion-map" data-pack="default" onclick='$( "#help" ).popup( "open" );'></li>
             </ul>
         </div>
 
@@ -108,6 +109,26 @@
               <li onclick='restart();$( "#restart" ).popup( "close" );'>yes</li>
               <li id="cancel" onclick='$( "#restart" ).popup( "close" );'>cancel</li>
           </ul>
+      </div>
+
+      <div data-role="popup" id ="help" class="ui-content"
+          data-theme="b" data-overlay-theme="b">
+          <h2>Help</h2>
+          <p>bla-bla</p>
+          <ul>
+                <li class="ion-fork-repo" data-pack="default"></li>
+                <li class="help">make an hypothesis</li>
+                <li class="ion-pull-request" data-pack="default"></li>
+                <li class="help">validate hypothesis</li>
+                <li class="ion-android-close" data-pack="android"></li>
+                <li class="help">rule out hypothesis</li>
+                <li class="ion-android-refresh" data-pack="android"></li>
+                <li class="help">restart same grid</li>
+                <li class="ion-code" data-pack="default"></li>
+                <li class="help">generate a new grid</li>
+          </ul>
+          <h3 id="check" class="helpButton" onclick='check();$( "#help" ).popup( "close" );'>Check current answer</h3>
+          <h3 id="solve" class="helpButton" onclick='solve();$( "#help" ).popup( "close" );'>Solve current grid</h3>
       </div>
 
     </div>

@@ -1,5 +1,6 @@
 var T = Array.from(new Array(9), () => new Array(9).fill(0));
 var Tref = Array.from(new Array(9), () => new Array(9));
+var Tsol = Array.from(new Array(9), () => new Array(9).fill(0));
 var digits = new Array(10);
 var hyp = false;
 var hyps = []
@@ -45,6 +46,7 @@ function updateGrid() {
         for(j=0;j<9;j++) {
             setCell(i,j,T[i][j]);
             Tref[i][j].style.color='';
+            Tref[i][j].style.backgroundColor='';
         }
     }
 }
@@ -147,6 +149,7 @@ function findAcceptableGrid() {
     while(_findAcceptableGrid() != true) {
         for(i=0;i<9;i++) { for(j=0;j<9;j++) T[i][j] = 0; }
     }
+    for(i=0;i<9;i++) { for(j=0;j<9;j++) Tsol[i][j] = T[i][j]; }
 }
 
 function _findValidityClass(A, n) {
@@ -310,4 +313,34 @@ function restart() {
 function newRandomGrid(nlevel) {
     $( "#newGrid" ).popup( "close" );
     setTimeout(function() { getRandomGrid(nlevel); }, 250);
+}
+
+function solve() {
+    for(i=0;i<9;i++) {
+        for(j=0;j<9;j++) {
+            if (T[i][j]==0) {
+                T[i][j] = Tsol[i][j];
+                setCell(i,j, T[i][j]);
+                Tref[i][j].style.color = "#B8B8B8";
+            } else if (T[i][j] != Tsol[i][j]) {
+                T[i][j] = Tsol[i][j];
+                setCell(i,j, T[i][j]);
+                Tref[i][j].style.color = "#B8B8B8";
+                Tref[i][j].style.backgroundColor = "#FBB";
+            }
+        }
+    }
+    hyp = false;
+    document.getElementById("but1").style.color="#000";
+    document.getElementById("but2").style.color="#B8B8B8";
+    document.getElementById("but3").style.color="#B8B8B8";
+}
+function check() {
+    for(i=0;i<9;i++) {
+        for(j=0;j<9;j++) {
+            if ((T[i][j] != Tsol[i][j])&&(T[i][j] != 0)) {
+                Tref[i][j].style.backgroundColor = "#FBB";
+            }
+        }
+    }
 }
