@@ -141,12 +141,12 @@ function _findAcceptableGrid() {
     all = shuffle(all);
     for (i=0;i<all.length;i++) {
         T[y][x] = all[i];
-        r = _findAcceptableGrid();
-        if (r) return true;
+        if(_findAcceptableGrid()) return true;
     }
 }
 function findAcceptableGrid() {
     var i,j;
+    for(i=0;i<9;i++) { for(j=0;j<9;j++) T[i][j] = 0; }
     while(_findAcceptableGrid() != true) {
         for(i=0;i<9;i++) { for(j=0;j<9;j++) T[i][j] = 0; }
     }
@@ -177,7 +177,6 @@ function _getRandomGrid2(nlevel) {
     var i, j, v, y1, x1, y2, x2, s;
     var sc = -2;
     var zeros = [];
-    for(i=0;i<9;i++) { for(j=0;j<9;j++) T[i][j] = 0; }
     findAcceptableGrid();
     for(i=0;i<nlevel;i++) {
         y1 = Math.floor(Math.random() * 9);
