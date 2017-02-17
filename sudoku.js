@@ -173,46 +173,47 @@ function _findValidityClass(A, n) {
     return sol;
 }
 
+/*
 function _getRandomGrid2(nlevel) {
     var i, j, v, y1, x1, y2, x2, s;
     var sc = -2;
     var zeros = [];
+    var kept = [];
+    for(i=0;i<9;i++) { for(j=0;j<9;j++) kept.push([i,j]); }
     findAcceptableGrid();
     for(i=0;i<nlevel;i++) {
-        y1 = Math.floor(Math.random() * 9);
-        x1 = Math.floor(Math.random() * 9);
-        if (T[y1][x1] != 0) {
-            T[y1][x1] = 0;
-            v = _findValidityClass(T, 0);
-            if(v < 0) T[y1][x1] = Tsol[y1][x1];
-            else {
-                sc = v; zeros.push([y1,x1]);
-            }
+        j = Math.floor(Math.random() * kept.length);
+        y1 = kept[j][0]; x1 = kept[j][1];
+        T[y1][x1] = 0;
+        v = _findValidityClass(T, 0);
+        if(v < 0) T[y1][x1] = Tsol[y1][x1];
+        else {
+            sc = v; zeros.push([y1,x1]);
+            kept[j] = kept[kept.length-1]; kept.pop();
         }
-        y1 = Math.floor(Math.random() * 9);
-        x1 = Math.floor(Math.random() * 9);
-        if (T[y1][x1] != 0) {
-            j = Math.floor(Math.random() * zeros.length);
-            y2 = zeros[j][0]; x2 = zeros[j][1];
-            T[y1][x1] = 0; T[y2][x2] = Tsol[y2][x2];
-            v = _findValidityClass(T, 0);
-            if(v < sc)
-                {
-                    T[y1][x1] = Tsol[y1][x1];
-                    T[y2][x2] = 0;
-                }
-            else {
-                sc = v;
-                zeros[j] = [y1, x1];
+        j = Math.floor(Math.random() * kept.length);
+        y1 = kept[j][0]; x1 = kept[j][1];
+        s = Math.floor(Math.random() * zeros.length);
+        y2 = zeros[s][0]; x2 = zeros[s][1];
+        T[y1][x1] = 0; T[y2][x2] = Tsol[y2][x2];
+        v = _findValidityClass(T, 0);
+        if(v < sc)
+            {
+                T[y1][x1] = Tsol[y1][x1];
+                T[y2][x2] = 0;
             }
+        else {
+            sc = v;
+            zeros[s] = [y1, x1];
+            kept[j] = [y2, x2];
         }
     }
     return sc;
 }
+*/
 
-/*
 function _getRandomGrid2(nlevel) {
-    var i, j, v, y1, x1, y2, x2, x3, y3, s;
+    var i, j, k, v, y1, x1, y2, x2, x3, y3, s;
     var sc = -2;
     var zeros = [];
     var kept = [];
@@ -231,11 +232,13 @@ function _getRandomGrid2(nlevel) {
         }
         // second step
         j = Math.floor(Math.random() * kept.length);
+        k = Math.floor(Math.random() * (kept.length-1));
+        if (j==k) k = kept.length-1;
+        if (j<k) { s=j;j=k;k=s; }
         y1 = kept[j][0]; x1 = kept[j][1];
-        j = Math.floor(Math.random() * kept.length);
-        y2 = kept[j][0]; x2 = kept[j][1];
-        j = Math.floor(Math.random() * zeros.length);
-        y3 = zeros[j][0]; x3 = zeros[j][1];
+        y2 = kept[k][0]; x2 = kept[k][1];
+        s = Math.floor(Math.random() * zeros.length);
+        y3 = zeros[s][0]; x3 = zeros[s][1];
         T[y1][x1] = 0; T[y2][x2] = 0; T[y3][x3] = Tsol[y3][x3];
         v = _findValidityClass(T, 0);
         if(v < sc)
@@ -246,12 +249,13 @@ function _getRandomGrid2(nlevel) {
             }
         else {
             sc = v;
-            zeros[j] = [y1, x1]; zeros.push([y2,x2]);
+            zeros[s] = [y1, x1]; zeros.push([y2,x2]);
+            kept[j] = kept[kept.length-1]; kept.pop();
+            kept[k] = [y3, x3];
         }
     }
     return sc;
 }
-*/
 
 function _getRandomGrid(nlevel) {
     console.log(_getRandomGrid2(nlevel));
