@@ -94,7 +94,7 @@ function init() {
     document.getElementById("but2").style.color="#B8B8B8";
     document.getElementById("but3").style.color="#B8B8B8";
 
-    setTimeout(function() { getRandomGrid(64); }, 64);
+    setTimeout(function() { getRandomGrid(64); }, 250);
 }
 
 function allowed(A, y,x) {
@@ -172,7 +172,7 @@ function _findValidityClass(A, n) {
 }
 
 function _getRandomGrid2(nlevel) {
-    var coords, i, j, v, y, x;
+    var i, j, v, y, x;
     var sc = -2;
     for(i=0;i<9;i++) { for(j=0;j<9;j++) T[i][j] = 0; }
     findAcceptableGrid();
