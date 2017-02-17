@@ -206,7 +206,6 @@ function _getRandomGrid2(nlevel) {
             }
         }
     }
-    console.log(sc);
     return sc;
 }
 
