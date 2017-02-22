@@ -167,7 +167,7 @@ function _findValidityClass(A, n) {
         if (r >= 0) {
             if (sol >= 0) return -2; // at least two solutions exist
             // sol = r;
-            sol = (all.length * r)^2;
+            sol = all.length * r;
         } else if (r==-2) return -2;
     }
     return sol;
