@@ -95,7 +95,7 @@ function init() {
     document.getElementById("but2").style.color="#B8B8B8";
     document.getElementById("but3").style.color="#B8B8B8";
 
-    setTimeout(function() { getRandomGrid(128); }, 250);
+    setTimeout(function() { getRandomGrid(96); }, 250);
 }
 
 function allowed(A, y,x) {
