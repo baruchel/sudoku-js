@@ -135,3 +135,19 @@ li {
     padding-bottom: 6px;
     cursor: pointer;
 }
+.rainbow {
+    animation: rainbow;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes rainbow {
+    0%{background-color: red}
+    15%{background-color: orange}
+    30%{background-color: yellow}
+    45%{background-color: green}
+    60%{background-color: blue}
+    75%{background-color: indigo}
+    85%{background-color: violet}
+    100%{background-color: red}
+}
