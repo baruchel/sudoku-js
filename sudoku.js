@@ -408,3 +408,6 @@ function check() {
         }
     }
 }
+function rainbow() {
+    $('#grid').addClass('rainbow')
+}
